@@ -4,9 +4,33 @@ layout: default
 
 # Structured Pruning of Feedback Delay Networks
 
-<p class="subtitle">Supplemental audio examples comparing dense (trained) FDN reverbs against their staged projections. The staged version is computationally cheaper while preserving acoustic quality.</p>
+<p class="subtitle">A perceptually lossless pruning algorithm for Feedback Delay Networks (FDNs).</p>
 
 <hr class="section-divider">
+
+## Background
+
+### Feedback Delay Networks
+- FDN's are recursive filters used for artificial reverb and decorrelation. 
+- Amongst other methods to synthesise reverberation, FDN's are particularly efficient computationally, nonetheless their time complexity is <em>O</em>(<em>N</em><sup>2</sup>).
+
+Here's a 4x4 FDN:
+
+![4x4 FDN diagram](pngs/fdn_diagram.svg)
+
+As shown, they consist of a set of delays and a feedback matrix through which the delay outputs are coupled to the delay inputs.
+
+### The ideal FDN triad
+
+This thesis formalises a threefold trade-off that's featured on this line of research since its early days.
+
+![FDN triad Venn diagram](pngs/triad_venn.svg)
+
+As shown on the diagram, known structures don't fully satisfy all three requirements simultaneously. This dissertation flips the design approach of FDN's from a "ground-up" to a "top to bottom" perspective:
+
+> What if we start from a differentiable (trained), nice-sounding, dense FDN and try to prune it without losing perceptual/acoustic quality, instead of designing it with the lowest possible N&times;N feedback matrix?
+
+
 
 ## Benchmark Results
 
