@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="/demo-day/assets/css/style.css?v=718c7858ef974c07325ac93922465d1d9869b43f">
+    <link rel="stylesheet" type="text/css" href="/demo-day/assets/css/custom.css">
+    <title>Structured Pruning of FDNs</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://localhost:4000/demo-day/">Structured Pruning of FDNs</a></h1>
+        <p>Supplemental audio examples for the BEng dissertation</p>
+        <p class="view"><a href="https://www.mit.edu/~facundof/">mit.edu/~facundof</a></p>
+
+        <div class="acknowledgements">
+          <p><strong>Acknowledgements</strong></p>
+          <p>Karolina Prawda (University of York)</p>
+          <p>Andy Hunt (University of York)</p>
+          <p>Sebastian J. Schlecht (FAU Erlangen-N&uuml;rnberg)</p>
+          <p>Mark Rau, RLE (Massachusetts Institute of Technology)</p>
+          <p>Jatin Chowdhury, RLE (Massachusetts Institute of Technology)</p>
+        </div>
+      </header>
+      <section>
+        <h1 id="structured-pruning-of-feedback-delay-networks">Structured Pruning of Feedback Delay Networks</h1>
+
+<p class="subtitle">Supplemental audio examples comparing dense (trained) FDN reverbs against their staged projections. The staged version is computationally cheaper while preserving acoustic quality.</p>
+
+<hr class="section-divider" />
+
+<h2 id="benchmark-results">Benchmark Results</h2>
+
+<p>Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLAS. Layer count <em>L</em> chosen per-<em>N</em> by listening test.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>L</th>
+      <th>σ<sub>ρ</sub> dense</th>
+      <th>σ<sub>ρ</sub> staged</th>
+      <th>t<sub>mix</sub> dense</th>
+      <th>t<sub>mix</sub> staged</th>
+      <th>LSD (dB)</th>
+      <th>Speedup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>4</td>
+      <td>8</td>
+      <td>3.0 dB</td>
+      <td>3.0 dB</td>
+      <td>1325 ms</td>
+      <td>1325 ms</td>
+      <td>0.00</td>
+      <td>17.4×</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>6</td>
+      <td>6.8 dB</td>
+      <td>6.8 dB</td>
+      <td>205 ms</td>
+      <td>205 ms</td>
+      <td>0.90</td>
+      <td>2.5×</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>4</td>
+      <td>8.2 dB</td>
+      <td>8.0 dB</td>
+      <td>125 ms</td>
+      <td>175 ms</td>
+      <td>2.46</td>
+      <td>3.6×</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>10</td>
+      <td>7.1 dB</td>
+      <td>7.8 dB</td>
+      <td>305 ms</td>
+      <td>305 ms</td>
+      <td>0.11</td>
+      <td>1.2×</td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>3</td>
+      <td>7.8 dB</td>
+      <td>7.8 dB</td>
+      <td>85 ms</td>
+      <td>65 ms</td>
+      <td>4.25</td>
+      <td>6.9×</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>6</td>
+      <td>9.0 dB</td>
+      <td>8.3 dB</td>
+      <td>105 ms</td>
+      <td>135 ms</td>
+      <td>2.04</td>
+      <td>7.4×</td>
+    </tr>
+    <tr>
+      <td>256</td>
+      <td>≤8</td>
+      <td>8.1 dB</td>
+      <td>8.1 dB</td>
+      <td>115 ms</td>
+      <td>145 ms</td>
+      <td>1.48</td>
+      <td>≥10.5×</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="section-divider" />
+
+<h2 id="impulse-responses">Impulse Responses</h2>
+
+<div class="audio-section">
+<h3>N = 16, L = 4 <span class="speed-badge">3.6&times; faster</span></h3>
+<div class="audio-grid">
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls=""><source src="audio/IR_N16_dense.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Staged (projected)</div>
+    <audio controls=""><source src="audio/IR_N16_L4.wav" type="audio/wav" /></audio>
+  </div>
+</div>
+</div>
+
+<div class="audio-section">
+<h3>N = 64, L = 3 <span class="speed-badge">6.9&times; faster</span></h3>
+<div class="audio-grid">
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls=""><source src="audio/IR_N64_dense.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Staged (projected)</div>
+    <audio controls=""><source src="audio/IR_N64_L3.wav" type="audio/wav" /></audio>
+  </div>
+</div>
+</div>
+
+<hr class="section-divider" />
+
+<h2 id="convolved-examples--n--16-l--4-36">Convolved Examples — N = 16, L = 4 <span class="speed-badge">3.6×</span></h2>
+
+<div class="audio-section">
+<h3><img src="pngs/voice_icon.png" alt="singing" /> Singing</h3>
+<div class="audio-grid">
+  <div class="audio-card dry">
+    <div class="card-label">Dry</div>
+    <audio controls=""><source src="audio/singing_dry.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls=""><source src="audio/singing_N16_dense.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Staged (projected)</div>
+    <audio controls=""><source src="audio/singing_N16_L4.wav" type="audio/wav" /></audio>
+  </div>
+</div>
+</div>
+
+<div class="audio-section">
+<h3><img src="pngs/drums_icon.png" alt="drums" /> Drums</h3>
+<div class="audio-grid">
+  <div class="audio-card dry">
+    <div class="card-label">Dry</div>
+    <audio controls=""><source src="audio/drums_dry.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls=""><source src="audio/drums_N16_dense.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Staged (projected)</div>
+    <audio controls=""><source src="audio/drums_N16_L4.wav" type="audio/wav" /></audio>
+  </div>
+</div>
+</div>
+
+<div class="audio-section">
+<h3><img src="pngs/orchestra_icon.png" alt="orchestral" /> Orchestral</h3>
+<div class="audio-grid">
+  <div class="audio-card dry">
+    <div class="card-label">Dry</div>
+    <audio controls=""><source src="audio/13_Orchestral_dry.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls=""><source src="audio/13_Orchestral_N16_dense.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Staged (projected)</div>
+    <audio controls=""><source src="audio/13_Orchestral_N16_L4.wav" type="audio/wav" /></audio>
+  </div>
+</div>
+</div>
+
+<hr class="section-divider" />
+
+<h2 id="convolved-examples--n--64-l--3-69">Convolved Examples — N = 64, L = 3 <span class="speed-badge">6.9×</span></h2>
+
+<div class="audio-section">
+<h3><img src="pngs/voice_icon.png" alt="singing" /> Singing</h3>
+<div class="audio-grid">
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls=""><source src="audio/singing_N64_dense.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Staged (projected)</div>
+    <audio controls=""><source src="audio/singing_N64_L3.wav" type="audio/wav" /></audio>
+  </div>
+</div>
+</div>
+
+<div class="audio-section">
+<h3><img src="pngs/drums_icon.png" alt="drums" /> Drums</h3>
+<div class="audio-grid">
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls=""><source src="audio/drums_N64_dense.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Staged (projected)</div>
+    <audio controls=""><source src="audio/drums_N64_L3.wav" type="audio/wav" /></audio>
+  </div>
+</div>
+</div>
+
+<div class="audio-section">
+<h3><img src="pngs/orchestra_icon.png" alt="orchestral" /> Orchestral</h3>
+<div class="audio-grid">
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls=""><source src="audio/13_Orchestral_N64_dense.wav" type="audio/wav" /></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Staged (projected)</div>
+    <audio controls=""><source src="audio/13_Orchestral_N64_L3.wav" type="audio/wav" /></audio>
+  </div>
+</div>
+</div>
+
+      </section>
+      <footer>
+        <p>By <a href="https://www.mit.edu/~facundof/">Facundo Franchino</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/demo-day/assets/js/scale.fix.js"></script>
+  </body>
+</html>

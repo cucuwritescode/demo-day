@@ -1,3 +1,3 @@
 title: Structured Pruning of FDNs
-description: Supplemental audio examples for the BEng dissertation
+description: A perceptually lossless pruning algorithm for Feedback Delay Networks (FDNs).
 theme: jekyll-theme-minimal

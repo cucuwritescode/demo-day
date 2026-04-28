@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/custom.css' | relative_url }}">
+    <title>{{ site.title | default: site.github.repository_name }}</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="{{ '/' | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
+        <p>{{ site.description | default: site.github.project_tagline }}</p>
+        <p class="view"><a href="https://www.mit.edu/~facundof/">mit.edu/~facundof</a></p>
+
+        <div class="acknowledgements">
+          <p><strong>Acknowledgements</strong></p>
+          <p>Karolina Prawda (University of York)</p>
+          <p>Andy Hunt (University of York)</p>
+          <p>Sebastian J. Schlecht (FAU Erlangen-N&uuml;rnberg)</p>
+          <p>Mark Rau, RLE (Massachusetts Institute of Technology)</p>
+          <p>Jatin Chowdhury, RLE (Massachusetts Institute of Technology)</p>
+        </div>
+      </header>
+      <section>
+        {{ content }}
+      </section>
+      <footer>
+        <p>By <a href="https://www.mit.edu/~facundof/">Facundo Franchino</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
+  </body>
+</html>

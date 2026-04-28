@@ -1,0 +1,111 @@
+/* Acknowledgements in sidebar */
+.acknowledgements {
+  margin-top: 1.5em;
+  font-size: 0.82em;
+  color: #888;
+  line-height: 1.5;
+}
+
+.acknowledgements p {
+  margin: 0;
+}
+
+.acknowledgements strong {
+  color: #666;
+}
+
+/* Audio comparison cards */
+.audio-section {
+  margin: 2em 0 2.5em 0;
+}
+
+.audio-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.3em;
+}
+
+.audio-section h3 img {
+  width: 32px;
+  height: 32px;
+}
+
+.audio-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.audio-card {
+  flex: 1;
+  min-width: 240px;
+  background: #f8f9fa;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.audio-card.dry {
+  flex: 0 0 100%;
+  background: #fff;
+  border: 1px dashed #ccc;
+}
+
+.audio-card .card-label {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.audio-card audio {
+  width: 100%;
+  height: 36px;
+}
+
+/* Benchmark table */
+table {
+  font-size: 0.88em;
+}
+
+th {
+  background: #f0f4f8;
+  font-size: 0.82em;
+}
+
+td, th {
+  padding: 6px 10px;
+  text-align: center;
+}
+
+/* Section dividers */
+.section-divider {
+  border: none;
+  border-top: 2px solid #e8e8e8;
+  margin: 2.5em 0;
+}
+
+/* Subtitle styling */
+.subtitle {
+  color: #666;
+  font-size: 0.95em;
+  margin-top: -0.5em;
+  margin-bottom: 1.5em;
+}
+
+/* Speed badge */
+.speed-badge {
+  display: inline-block;
+  background: #e7f3ff;
+  color: #1a6fbf;
+  font-size: 0.8em;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
