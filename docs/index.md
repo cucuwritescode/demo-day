@@ -36,22 +36,22 @@ As shown on the diagram, known structures don't fully satisfy all three requirem
 
 Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLAS. Layer count *L* chosen per-*N* by listening test.
 
-| N | L | &sigma;<sub>&rho;</sub> dense | &sigma;<sub>&rho;</sub> staged | t<sub>mix</sub> dense | t<sub>mix</sub> staged | LSD (dB) | Speedup |
-|---|---|---|---|---|---|---|---|
-| 4 | 8 | 3.0 dB | 3.0 dB | 1325 ms | 1325 ms | 0.00 | 17.4&times; |
-| 8 | 6 | 6.8 dB | 6.8 dB | 205 ms | 205 ms | 0.90 | 2.5&times; |
-| 16 | 4 | 8.2 dB | 8.0 dB | 125 ms | 175 ms | 2.46 | 3.6&times; |
-| 32 | 10 | 7.1 dB | 7.8 dB | 305 ms | 305 ms | 0.11 | 1.2&times; |
-| 64 | 3 | 7.8 dB | 7.8 dB | 85 ms | 65 ms | 4.25 | 6.9&times; |
-| 128 | 6 | 9.0 dB | 8.3 dB | 105 ms | 135 ms | 2.04 | 7.4&times; |
-| 256 | &le;8 | 8.1 dB | 8.1 dB | 115 ms | 145 ms | 1.48 | &ge;10.5&times; |
+| N | L | LSD (dB) | Staged (ns) | BLAS (ns) | Speedup |
+|---|---|---|---|---|---|
+| 4 | 8 | 0.00 | 1.5 | 36.2 | 25.0&times; |
+| 8 | 6 | 0.90 | 7.1 | 26.7 | 3.8&times; |
+| 16 | 4 | 2.46 | 8.8 | 38.4 | 4.4&times; |
+| 32 | 10 | 0.11 | 56.2 | 71.3 | 1.3&times; |
+| 64 | 3 | 4.25 | 26.2 | 189.6 | 7.2&times; |
+| 128 | 3 | 2.24 | 39.2 | 658.4 | 16.8&times; |
+| 256 | 3 | 1.50 | 75.8 | 1989.2 | 26.3&times; |
 
 <hr class="section-divider">
 
 ## Impulse Responses
 
 <div class="audio-section">
-<h3>N = 16, L = 4 <span class="speed-badge">3.6&times; faster</span></h3>
+<h3>N = 16, L = 4 <span class="speed-badge">4.4&times; faster</span></h3>
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
@@ -65,7 +65,7 @@ Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLA
 </div>
 
 <div class="audio-section">
-<h3>N = 64, L = 3 <span class="speed-badge">6.9&times; faster</span></h3>
+<h3>N = 64, L = 3 <span class="speed-badge">7.2&times; faster</span></h3>
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
@@ -80,7 +80,7 @@ Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLA
 
 <hr class="section-divider">
 
-## Convolved Examples &mdash; N = 16, L = 4 <span class="speed-badge">3.6&times;</span>
+## Convolved Examples &mdash; N = 16, L = 4 <span class="speed-badge">4.4&times;</span>
 
 <div class="audio-section">
 <h3><img src="pngs/voice_icon.png" alt="singing"> Singing</h3>
@@ -138,7 +138,7 @@ Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLA
 
 <hr class="section-divider">
 
-## Convolved Examples &mdash; N = 64, L = 3 <span class="speed-badge">6.9&times;</span>
+## Convolved Examples &mdash; N = 64, L = 3 <span class="speed-badge">7.2&times;</span>
 
 <div class="audio-section">
 <h3><img src="pngs/voice_icon.png" alt="singing"> Singing</h3>

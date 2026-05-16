@@ -66,11 +66,9 @@
     <tr>
       <th>N</th>
       <th>L</th>
-      <th>σ<sub>ρ</sub> dense</th>
-      <th>σ<sub>ρ</sub> staged</th>
-      <th>t<sub>mix</sub> dense</th>
-      <th>t<sub>mix</sub> staged</th>
       <th>LSD (dB)</th>
+      <th>Staged (ns)</th>
+      <th>BLAS (ns)</th>
       <th>Speedup</th>
     </tr>
   </thead>
@@ -78,72 +76,58 @@
     <tr>
       <td>4</td>
       <td>8</td>
-      <td>3.0 dB</td>
-      <td>3.0 dB</td>
-      <td>1325 ms</td>
-      <td>1325 ms</td>
       <td>0.00</td>
-      <td>17.4×</td>
+      <td>1.5</td>
+      <td>36.2</td>
+      <td>25.0×</td>
     </tr>
     <tr>
       <td>8</td>
       <td>6</td>
-      <td>6.8 dB</td>
-      <td>6.8 dB</td>
-      <td>205 ms</td>
-      <td>205 ms</td>
       <td>0.90</td>
-      <td>2.5×</td>
+      <td>7.1</td>
+      <td>26.7</td>
+      <td>3.8×</td>
     </tr>
     <tr>
       <td>16</td>
       <td>4</td>
-      <td>8.2 dB</td>
-      <td>8.0 dB</td>
-      <td>125 ms</td>
-      <td>175 ms</td>
       <td>2.46</td>
-      <td>3.6×</td>
+      <td>8.8</td>
+      <td>38.4</td>
+      <td>4.4×</td>
     </tr>
     <tr>
       <td>32</td>
       <td>10</td>
-      <td>7.1 dB</td>
-      <td>7.8 dB</td>
-      <td>305 ms</td>
-      <td>305 ms</td>
       <td>0.11</td>
-      <td>1.2×</td>
+      <td>56.2</td>
+      <td>71.3</td>
+      <td>1.3×</td>
     </tr>
     <tr>
       <td>64</td>
       <td>3</td>
-      <td>7.8 dB</td>
-      <td>7.8 dB</td>
-      <td>85 ms</td>
-      <td>65 ms</td>
       <td>4.25</td>
-      <td>6.9×</td>
+      <td>26.2</td>
+      <td>189.6</td>
+      <td>7.2×</td>
     </tr>
     <tr>
       <td>128</td>
-      <td>6</td>
-      <td>9.0 dB</td>
-      <td>8.3 dB</td>
-      <td>105 ms</td>
-      <td>135 ms</td>
-      <td>2.04</td>
-      <td>7.4×</td>
+      <td>3</td>
+      <td>2.24</td>
+      <td>39.2</td>
+      <td>658.4</td>
+      <td>16.8×</td>
     </tr>
     <tr>
       <td>256</td>
-      <td>≤8</td>
-      <td>8.1 dB</td>
-      <td>8.1 dB</td>
-      <td>115 ms</td>
-      <td>145 ms</td>
-      <td>1.48</td>
-      <td>≥10.5×</td>
+      <td>3</td>
+      <td>1.50</td>
+      <td>75.8</td>
+      <td>1989.2</td>
+      <td>26.3×</td>
     </tr>
   </tbody>
 </table>
@@ -153,7 +137,7 @@
 <h2 id="impulse-responses">Impulse Responses</h2>
 
 <div class="audio-section">
-<h3>N = 16, L = 4 <span class="speed-badge">3.6&times; faster</span></h3>
+<h3>N = 16, L = 4 <span class="speed-badge">4.4&times; faster</span></h3>
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
@@ -167,7 +151,7 @@
 </div>
 
 <div class="audio-section">
-<h3>N = 64, L = 3 <span class="speed-badge">6.9&times; faster</span></h3>
+<h3>N = 64, L = 3 <span class="speed-badge">7.2&times; faster</span></h3>
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
@@ -182,7 +166,7 @@
 
 <hr class="section-divider" />
 
-<h2 id="convolved-examples--n--16-l--4-36">Convolved Examples — N = 16, L = 4 <span class="speed-badge">3.6×</span></h2>
+<h2 id="convolved-examples--n--16-l--4-44">Convolved Examples — N = 16, L = 4 <span class="speed-badge">4.4×</span></h2>
 
 <div class="audio-section">
 <h3><img src="pngs/voice_icon.png" alt="singing" /> Singing</h3>
@@ -240,7 +224,7 @@
 
 <hr class="section-divider" />
 
-<h2 id="convolved-examples--n--64-l--3-69">Convolved Examples — N = 64, L = 3 <span class="speed-badge">6.9×</span></h2>
+<h2 id="convolved-examples--n--64-l--3-72">Convolved Examples — N = 64, L = 3 <span class="speed-badge">7.2×</span></h2>
 
 <div class="audio-section">
 <h3><img src="pngs/voice_icon.png" alt="singing" /> Singing</h3>
