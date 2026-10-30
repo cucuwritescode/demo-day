@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=9a9b31f5ebd28b66c6efddb5a0d366c1c437e8f3">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=5acd799372a3c743a1756ccbdd161ad3f37a51b8">
     <link rel="stylesheet" type="text/css" href="/assets/css/custom.css">
     <title>Structured Pruning of FDNs</title>
   </head>
@@ -99,7 +99,7 @@
 </div>
 </div>
 
-<p>Mixing 64 delay lines here costs 18.2 ns per sample. Dense mixing of just 16 lines already costs 39.1 ns.</p>
+<p>Our staged 64&times;64 feedback matrix runs in 18.2 ns per sample, cheaper than a dense 16&times;16 feedback matrix (39.1 ns).</p>
 
 <div class="audio-section">
 <h3>N = 128, pairwise, L = 3 <span class="speed-badge">14.1&times; faster</span></h3>
@@ -115,7 +115,7 @@
 </div>
 </div>
 
-<p>Mixing 128 delay lines here costs 44.4 ns per sample. Dense mixing of 32 lines already costs 71.0 ns.</p>
+<p>Our staged 128&times;128 feedback matrix runs in 44.4 ns per sample, cheaper than a dense 32&times;32 feedback matrix (71.0 ns).</p>
 
 <hr class="section-divider" />
 

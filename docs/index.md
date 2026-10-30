@@ -71,7 +71,7 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 </div>
 </div>
 
-<p>Mixing 64 delay lines here costs 18.2 ns per sample. Dense mixing of just 16 lines already costs 39.1 ns.</p>
+<p>Our staged 64&times;64 feedback matrix runs in 18.2 ns per sample, cheaper than a dense 16&times;16 feedback matrix (39.1 ns).</p>
 
 <div class="audio-section">
 <h3>N = 128, pairwise, L = 3 <span class="speed-badge">14.1&times; faster</span></h3>
@@ -87,7 +87,7 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 </div>
 </div>
 
-<p>Mixing 128 delay lines here costs 44.4 ns per sample. Dense mixing of 32 lines already costs 71.0 ns.</p>
+<p>Our staged 128&times;128 feedback matrix runs in 44.4 ns per sample, cheaper than a dense 32&times;32 feedback matrix (71.0 ns).</p>
 
 
 <hr class="section-divider">
