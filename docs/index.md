@@ -6,6 +6,8 @@ layout: default
 
 <p class="subtitle">A perceptually lossless pruning algorithm for Feedback Delay Networks (FDNs).</p>
 
+<p><a href="https://github.com/cucuwritescode/fdn_pruning">Code on GitHub</a> &middot; paper on arXiv soon</p>
+
 <hr class="section-divider">
 
 ## Background
@@ -62,11 +64,11 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/IR_N64_dense.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/IR_N64_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Radix-4 (projected)</div>
-    <audio controls><source src="audio/IR_N64_radix4_L2.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/IR_N64_radix4_L2.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -78,11 +80,11 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/IR_N128_dense.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/IR_N128_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Pairwise (projected)</div>
-    <audio controls><source src="audio/IR_N128_pairwise_L3.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/IR_N128_pairwise_L3.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -99,15 +101,15 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 <div class="audio-grid">
   <div class="audio-card dry">
     <div class="card-label">Dry</div>
-    <audio controls><source src="audio/singing_dry.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/singing_dry.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/singing_N64_dense.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/singing_N64_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Radix-4 (projected)</div>
-    <audio controls><source src="audio/singing_N64_radix4_L2.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/singing_N64_radix4_L2.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -117,15 +119,15 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 <div class="audio-grid">
   <div class="audio-card dry">
     <div class="card-label">Dry</div>
-    <audio controls><source src="audio/drums_dry.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/drums_dry.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/drums_N64_dense.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/drums_N64_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Radix-4 (projected)</div>
-    <audio controls><source src="audio/drums_N64_radix4_L2.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/drums_N64_radix4_L2.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -135,15 +137,15 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 <div class="audio-grid">
   <div class="audio-card dry">
     <div class="card-label">Dry</div>
-    <audio controls><source src="audio/13_Orchestral_dry.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/13_Orchestral_dry.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/13_Orchestral_N64_dense.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/13_Orchestral_N64_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Radix-4 (projected)</div>
-    <audio controls><source src="audio/13_Orchestral_N64_radix4_L2.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/13_Orchestral_N64_radix4_L2.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -157,11 +159,11 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/singing_N128_dense.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/singing_N128_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Pairwise (projected)</div>
-    <audio controls><source src="audio/singing_N128_pairwise_L3.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/singing_N128_pairwise_L3.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -171,11 +173,11 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/drums_N128_dense.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/drums_N128_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Pairwise (projected)</div>
-    <audio controls><source src="audio/drums_N128_pairwise_L3.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/drums_N128_pairwise_L3.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -185,11 +187,11 @@ The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwis
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/13_Orchestral_N128_dense.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/13_Orchestral_N128_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
     <div class="card-label">Pairwise (projected)</div>
-    <audio controls><source src="audio/13_Orchestral_N128_pairwise_L3.wav" type="audio/wav"></audio>
+    <audio controls preload="none"><source src="audio/13_Orchestral_N128_pairwise_L3.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
