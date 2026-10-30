@@ -6,7 +6,7 @@ layout: default
 
 <p class="subtitle">A perceptually lossless pruning algorithm for Feedback Delay Networks (FDNs).</p>
 
-<p><a href="https://github.com/cucuwritescode/fdn_pruning">Code on GitHub</a> &middot; paper on arXiv soon</p>
+<p><a href="https://arxiv.org/abs/2610.38768">Paper on arXiv</a> &middot; <a href="https://github.com/cucuwritescode/fdn_pruning">Code on GitHub</a></p>
 
 <hr class="section-divider">
 
