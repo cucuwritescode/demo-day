@@ -11,76 +11,88 @@ layout: default
 ## Background
 
 ### Feedback Delay Networks
-- FDN's are recursive filters used for artificial reverb and decorrelation. 
+- FDN's are recursive filters used for artificial reverb and decorrelation.
 - Amongst other methods to synthesise reverberation, FDN's are particularly efficient computationally, nonetheless their time complexity is <em>O</em>(<em>N</em><sup>2</sup>).
 
 Here's a 4x4 FDN:
 
-![4x4 FDN diagram](pngs/fdn_diagram.svg)
+![4x4 FDN diagram](pngs/fig_fdn.svg)
 
-As shown, they consist of a set of delays and a feedback matrix through which the delay outputs are coupled to the delay inputs.
+As shown, they consist of a set of delays and a feedback matrix through which the delay outputs are coupled to the delay inputs. The highlighted feedback matrix is the only part we touch.
 
 ### The ideal FDN triad
 
-This thesis formalises a threefold trade-off that's featured on this line of research since its early days.
+This paper formalises a threefold trade-off that's featured on this line of research since its early days.
 
-![FDN triad Venn diagram](pngs/triad_venn.svg)
+![The ideal FDN triad](pngs/fig_triad.svg)
 
-As shown on the diagram, known structures don't fully satisfy all three requirements simultaneously. This dissertation flips the design approach of FDN's from a "ground-up" to a "top to bottom" perspective:
+As shown on the diagram, known structures don't fully satisfy all three requirements simultaneously. This work flips the design approach of FDN's from a "ground-up" to a "top to bottom" perspective:
 
 > What if we start from a differentiable (trained), nice-sounding, dense FDN and try to prune it without losing perceptual/acoustic quality, instead of designing it with the lowest possible N&times;N feedback matrix?
 
+<hr class="section-divider">
 
+## Method
+
+The dense feedback matrix is replaced by a few stages of fixed routing and small orthogonal blocks, fitted in two phases:
+
+- **Matrix fitting.** Match the dense matrix entry by entry; each small block has an exact closed-form update.
+- **Response refinement.** Adjust all blocks jointly so the complete reverberator's magnitude response matches the dense one.
+
+![Two-phase projection pipeline](pngs/fig_pipeline.svg)
+
+Every stage is orthogonal by construction, so the pruned FDN preserves energy exactly, at every step of the optimisation. Delays, gains and attenuation stay fixed; only the mixing changes.
+
+<hr class="section-divider">
 
 ## Benchmark Results
 
-Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLAS. Layer count *L* chosen per-*N* by listening test.
+Compiled C++ with ARM NEON intrinsics on Apple M2, vs Apple Accelerate BLAS (SGEMV). Labels give speedups over isolated-call dense BLAS; staged times are measured in blocks of 512 calls.
 
-| N | L | LSD (dB) | Staged (ns) | BLAS (ns) | Speedup |
-|---|---|---|---|---|---|
-| 4 | 8 | 0.00 | 1.5 | 36.2 | 25.0&times; |
-| 8 | 6 | 0.90 | 7.1 | 26.7 | 3.8&times; |
-| 16 | 4 | 2.46 | 8.8 | 38.4 | 4.4&times; |
-| 32 | 10 | 0.11 | 56.2 | 71.3 | 1.3&times; |
-| 64 | 3 | 4.25 | 26.2 | 189.6 | 7.2&times; |
-| 128 | 3 | 2.24 | 39.2 | 658.4 | 16.8&times; |
-| 256 | 3 | 1.50 | 75.8 | 1989.2 | 26.3&times; |
+![Runtime performance](pngs/fig_runtime.svg)
+
+The fastest benchmarked kernels use radix-4 at *N* = 16, 32, 64, 128 and pairwise stages at *N* = 256. At *N* = 256, coefficient storage falls from 65,536 to 768 floats.
 
 <hr class="section-divider">
 
 ## Impulse Responses
 
 <div class="audio-section">
-<h3>N = 16, L = 4 <span class="speed-badge">4.4&times; faster</span></h3>
-<div class="audio-grid">
-  <div class="audio-card">
-    <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/IR_N16_dense.wav" type="audio/wav"></audio>
-  </div>
-  <div class="audio-card">
-    <div class="card-label">Staged (projected)</div>
-    <audio controls><source src="audio/IR_N16_L4.wav" type="audio/wav"></audio>
-  </div>
-</div>
-</div>
-
-<div class="audio-section">
-<h3>N = 64, L = 3 <span class="speed-badge">7.2&times; faster</span></h3>
+<h3>N = 64, radix-4, L = 2 <span class="speed-badge">13.7&times; faster</span></h3>
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
     <audio controls><source src="audio/IR_N64_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
-    <div class="card-label">Staged (projected)</div>
-    <audio controls><source src="audio/IR_N64_L3.wav" type="audio/wav"></audio>
+    <div class="card-label">Radix-4 (projected)</div>
+    <audio controls><source src="audio/IR_N64_radix4_L2.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
 
+<p>Mixing 64 delay lines here costs 18.2 ns per sample. Dense mixing of just 16 lines already costs 39.1 ns.</p>
+
+<div class="audio-section">
+<h3>N = 128, pairwise, L = 3 <span class="speed-badge">14.1&times; faster</span></h3>
+<div class="audio-grid">
+  <div class="audio-card">
+    <div class="card-label">Dense (trained)</div>
+    <audio controls><source src="audio/IR_N128_dense.wav" type="audio/wav"></audio>
+  </div>
+  <div class="audio-card">
+    <div class="card-label">Pairwise (projected)</div>
+    <audio controls><source src="audio/IR_N128_pairwise_L3.wav" type="audio/wav"></audio>
+  </div>
+</div>
+</div>
+
+<p>Mixing 128 delay lines here costs 44.4 ns per sample. Dense mixing of 32 lines already costs 71.0 ns.</p>
+
+
 <hr class="section-divider">
 
-## Convolved Examples &mdash; N = 16, L = 4 <span class="speed-badge">4.4&times;</span>
+## Convolved Examples &mdash; N = 64, radix-4, L = 2 <span class="speed-badge">13.7&times;</span>
 
 <div class="audio-section">
 <h3><img src="pngs/voice_icon.png" alt="singing"> Singing</h3>
@@ -91,11 +103,11 @@ Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLA
   </div>
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/singing_N16_dense.wav" type="audio/wav"></audio>
+    <audio controls><source src="audio/singing_N64_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
-    <div class="card-label">Staged (projected)</div>
-    <audio controls><source src="audio/singing_N16_L4.wav" type="audio/wav"></audio>
+    <div class="card-label">Radix-4 (projected)</div>
+    <audio controls><source src="audio/singing_N64_radix4_L2.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -109,11 +121,11 @@ Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLA
   </div>
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/drums_N16_dense.wav" type="audio/wav"></audio>
+    <audio controls><source src="audio/drums_N64_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
-    <div class="card-label">Staged (projected)</div>
-    <audio controls><source src="audio/drums_N16_L4.wav" type="audio/wav"></audio>
+    <div class="card-label">Radix-4 (projected)</div>
+    <audio controls><source src="audio/drums_N64_radix4_L2.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -127,29 +139,29 @@ Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLA
   </div>
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/13_Orchestral_N16_dense.wav" type="audio/wav"></audio>
+    <audio controls><source src="audio/13_Orchestral_N64_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
-    <div class="card-label">Staged (projected)</div>
-    <audio controls><source src="audio/13_Orchestral_N16_L4.wav" type="audio/wav"></audio>
+    <div class="card-label">Radix-4 (projected)</div>
+    <audio controls><source src="audio/13_Orchestral_N64_radix4_L2.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
 
 <hr class="section-divider">
 
-## Convolved Examples &mdash; N = 64, L = 3 <span class="speed-badge">7.2&times;</span>
+## Convolved Examples &mdash; N = 128, pairwise, L = 3 <span class="speed-badge">14.1&times;</span>
 
 <div class="audio-section">
 <h3><img src="pngs/voice_icon.png" alt="singing"> Singing</h3>
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/singing_N64_dense.wav" type="audio/wav"></audio>
+    <audio controls><source src="audio/singing_N128_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
-    <div class="card-label">Staged (projected)</div>
-    <audio controls><source src="audio/singing_N64_L3.wav" type="audio/wav"></audio>
+    <div class="card-label">Pairwise (projected)</div>
+    <audio controls><source src="audio/singing_N128_pairwise_L3.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -159,11 +171,11 @@ Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLA
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/drums_N64_dense.wav" type="audio/wav"></audio>
+    <audio controls><source src="audio/drums_N128_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
-    <div class="card-label">Staged (projected)</div>
-    <audio controls><source src="audio/drums_N64_L3.wav" type="audio/wav"></audio>
+    <div class="card-label">Pairwise (projected)</div>
+    <audio controls><source src="audio/drums_N128_pairwise_L3.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
@@ -173,11 +185,17 @@ Compiled C++ with ARM NEON intrinsics on Apple M-series, vs Apple Accelerate BLA
 <div class="audio-grid">
   <div class="audio-card">
     <div class="card-label">Dense (trained)</div>
-    <audio controls><source src="audio/13_Orchestral_N64_dense.wav" type="audio/wav"></audio>
+    <audio controls><source src="audio/13_Orchestral_N128_dense.wav" type="audio/wav"></audio>
   </div>
   <div class="audio-card">
-    <div class="card-label">Staged (projected)</div>
-    <audio controls><source src="audio/13_Orchestral_N64_L3.wav" type="audio/wav"></audio>
+    <div class="card-label">Pairwise (projected)</div>
+    <audio controls><source src="audio/13_Orchestral_N128_pairwise_L3.wav" type="audio/wav"></audio>
   </div>
 </div>
 </div>
+
+<hr class="section-divider">
+
+## Conclusions
+
+We propose a new paradigm for FDN design. Rather than starting with a small structure and trying to make it sound good, we begin with the desired acoustic behaviour and make its implementation cheaper. Our results show that dense designs can be substantially simplified while closely preserving their sound, offering a practical route towards the ideal FDN triad of colourlessness, smoothness and low computational cost.
